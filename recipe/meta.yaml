@@ -11,20 +11,22 @@ source:
 
 build:
   noarch: python
-  number: 0
+  number: 1
   script: "{{ PYTHON }} -m pip install . --no-deps --ignore-installed -vv "
 
 requirements:
   host:
     - pip
-    - python
+    - python {{ python_min }}
   run:
-    - python
+    - python >={{ python_min }}
     - python-dateutil
     - pyyaml
     - setuptools
 
 test:
+  requires:
+    - python {{ python_min }}
   imports:
     - vcstools
 
